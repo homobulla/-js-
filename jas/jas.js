@@ -22,12 +22,12 @@
 				// resources类型转化为array
 			typeof resources === 'string' && (resources = [resources]);
 
-			map[id] = {
+			map[uid] = {
 				waiting: Array.from(resources), // cope rray
 				callback: callback,
 				obj: obj || window 
 			}
-            // 
+			// 
 			for (var i = 0, len = resources.length; i < len; ++i) {
 				var res = resources[i],
 					list = rmap[res] || (rmap[res] = []);
@@ -68,5 +68,5 @@
 
 	}
 
-	homo = new Homo();
+	window.homo = new Homo();
 })();
