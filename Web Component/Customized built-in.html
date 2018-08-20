@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Customized built-in</title>
+</head>
+
+<body>
+    <button is="menu-button">自定义的扩展元素</button>
+    <script>
+        class MenuButton extends HTMLButtonElement {
+            constructor() {
+                super() 
+            }
+
+
+        }
+        customElements.define('menu-button', MenuButton);
+    </script>
+</body>
+
+</html>

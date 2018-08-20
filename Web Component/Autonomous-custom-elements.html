@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Autonomous-custom-elements</title>
+</head>
+
+<body>
+    <counter-element>counter-element</counter-element>
+    <counter-element>demo-two</counter-element>
+    <script>
+        // 我们定义一个 ES6 的类，拓展于 HTMLElement
+        class CounterElement extends HTMLElement {
+            constructor() {
+                super();
+
+                // 初始化计数器的值
+                this.counter = 0;
+
+                // 我们在当前 custom element 上附加上一个打开的影子根节点
+                const shadowRoot = this.attachShadow({ mode: 'open' });
+
+                // 我们使用模板字符串来定义一些内嵌样式
+                const styles = `
+            :host {
+                position: relative;
+                font-family: sans-serif;
+            }
+ 
+            #counter-increment, #counter-decrement {
+                width: 60px;
+                height: 30px;
+                margin: 20px;
+                background: none;
+                border: 1px solid black;
+            }
+ 
+            #counter-value {
+                font-weight: bold;
+            }
+        `;
+
+                // 我们给影子根节点提供一些 HTML
+                shadowRoot.innerHTML = `
+            <style>${styles}</style>
+            <h3>Counter</h3>
+            <slot name='counter-content'>Button</slot>
+            <button id='counter-increment'> - </button>
+            <span id='counter-value'>; 0 </span>;
+            <button id='counter-decrement'> + </button>
+        `;
+
+                // 我们可以通过影子根节点查询内部节点
+                // 就比如这里的按钮
+                this.incrementButton = this.shadowRoot.querySelector('#counter-increment');
+                this.decrementButton = this.shadowRoot.querySelector('#counter-decrement');
+                this.counterValue = this.shadowRoot.querySelector('#counter-value');
+
+                // 我们可以绑定事件，用类方法来响应
+                this.incrementButton.addEventListener("click", this.decrement.bind(this));
+                this.decrementButton.addEventListener("click", this.increment.bind(this));
+
+            }
+
+            increment() {
+                this.counter++
+                this.invalidate();
+            }
+
+            decrement() {
+                this.counter--
+                this.invalidate();
+            }
+
+            // 当计数器的值发生变化时调用
+            invalidate() {
+                this.counterValue.innerHTML = this.counter;
+            }
+        }
+
+        // 这里定义了可以在 DOM 树上直接使用的真实节点
+        customElements.define('counter-element', CounterElement);
+    </script>
+</body>
+
+</html>

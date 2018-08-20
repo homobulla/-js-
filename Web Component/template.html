@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>web compontent</title>
+</head>
+
+<body>
+    <div class="menus"></div>
+    <template id="menusTemplate">
+        <slot></slot>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+        </ul>
+    </template>
+    <script>
+        var menusTemplate = document.querySelector('#menusTemplate');
+        var frag = document.importNode(menusTemplate.content, true);
+        document.querySelector('.menus').appendChild(frag);
+
+    </script>
+</body>
+
+</html>
