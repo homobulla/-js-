@@ -29,7 +29,7 @@
 ##### 创建自定义标签元素
 
 为了创建一个自定义标签元素，我们需要继承 HTMLELement 类:
-
+查看[demo](https://github.com/homobulla/-js-/blob/master/Web%20Component/Autonomous-custom-elements.html)
 ```js
 class GoTop extends HTMLElement {
     constructor() {
@@ -57,7 +57,7 @@ shadowRoot.innerHTML = '<p>Shadow DOM Content</p>'
 #### HTML template 模板
 
 HTML 模板是支持度最高的特性，其允许开发者定义一个直接被复制时才会使用的 html 模板。
-
+查看[demo](https://github.com/homobulla/-js-/blob/master/Web%20Component/template.html)
 ```html
 <template id="custom-template>
      <h1>HTML Templates are rad</h1>
